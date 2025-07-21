@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Fundamentals - 16-Week Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for the red and white theme */
+        .bg-college-red { background-color: #c8102e; }
+        .text-college-red { color: #c8102e; }
+        .border-college-red { border-color: #c8102e; }
+        .hover-bg-college-red-dark:hover { background-color: #a20c24; }
+        
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .card.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-college-red shadow-md">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-white">
+                Network Fundamentals
+            </h1>
+            <p class="text-white opacity-90 mt-1">A 16-Week Interactive Course</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-semibold text-gray-800">Course Modules</h2>
+                <p class="mt-2 text-gray-600">Select a week to begin the lesson and interactive exercises.</p>
+            </div>
+
+            <!-- Weekly Modules Grid -->
+            <div id="modules-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Cards will be injected here by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2025 Your College Name. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const weeks = [
+                { title: "Introduction to Networking", description: "Network types, topologies, and models.", link: "week1.html", active: true },
+                { title: "The OSI Model", description: "Exploring the seven layers of networking.", link: "#", active: false },
+                { title: "The TCP/IP Model", description: "Understanding the internet's protocol suite.", link: "#", active: false },
+                { title: "Physical Layer", description: "Cables, signals, and transmission media.", link: "#", active: false },
+                { title: "Data Link Layer", description: "MAC addresses, frames, and switches.", link: "#", active: false },
+                { title: "Network Layer", description: "IP addressing, subnets, and routers.", link: "#", active: false },
+                { title: "IP Addressing & Subnetting", description: "Mastering subnets, CIDR, and VLSM.", link: "#", active: false },
+                { title: "Transport Layer", description: "TCP vs. UDP, ports, and sockets.", link: "#", active: false },
+                { title: "Application Layer", description: "HTTP, DNS, FTP, and other protocols.", link: "#", active: false },
+                { title: "Wireless Networking", description: "Wi-Fi standards, security, and access points.", link: "#", active: false },
+                { title: "Network Security Fundamentals", description: "The CIA triad, firewalls, and threats.", link: "#", active: false },
+                { title: "Advanced Network Security", description: "VPNs, Intrusion Detection, and ACLs.", link: "#", active: false },
+                { title: "Network Troubleshooting", description: "Using ping, traceroute, and other tools.", link: "#", active: false },
+                { title: "Cloud Networking", description: "Virtual networks in AWS, Azure, and GCP.", link: "#", active: false },
+                { title: "SDN & Network Automation", description: "Software-Defined Networking and automation.", link: "#", active: false },
+                { title: "Final Review & Future Trends", description: "Course recap and emerging tech.", link: "#", active: false }
+            ];
+
+            const grid = document.getElementById('modules-grid');
+
+            weeks.forEach((week, index) => {
+                const weekNumber = index + 1;
+                const cardWrapper = document.createElement('a');
+                
+                const cardContent = `
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col ${week.active ? 'card' : 'card disabled'}">
+                        <div class="bg-college-red p-4">
+                            <h3 class="font-bold text-white">Week ${weekNumber}</h3>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h4 class="font-semibold text-lg text-gray-800">${week.title}</h4>
+                            <p class="mt-2 text-gray-600 text-sm">${week.description}</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 border-t border-gray-200">
+                            <span class="text-sm font-medium ${week.active ? 'text-college-red' : 'text-gray-500'}">
+                                ${week.active ? 'Start Lesson' : 'Coming Soon'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+
+                if (week.active) {
+                    cardWrapper.href = week.link;
+                } else {
+                    cardWrapper.href = '#';
+                    cardWrapper.onclick = (e) => e.preventDefault();
+                }
+                
+                cardWrapper.innerHTML = cardContent;
+                grid.appendChild(cardWrapper);
+            });
+        });
+    </script>
+
+</body>
+</html>
